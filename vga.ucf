@@ -1,0 +1,14 @@
+NET "clk"            LOC = "V10" | IOSTANDARD = "LVCMOS33";
+NET "rst"            LOC = "T10" | IOSTANDARD = "LVCMOS33";
+
+#Controles da VGA
+NET "red_out" LOC = "U7" | IOSTANDARD = "LVCMOS33";
+NET "red_out" LOC = "V7" | IOSTANDARD = "LVCMOS33";
+NET "red_out" LOC = "N7" | IOSTANDARD = "LVCMOS33";
+NET "green_out" LOC = "P8" | IOSTANDARD = "LVCMOS33";
+NET "green_out" LOC = "T6" | IOSTANDARD = "LVCMOS33";
+NET "green_out" LOC = "V6" | IOSTANDARD = "LVCMOS33";
+NET "blue_out" LOC = "R7" | IOSTANDARD = "LVCMOS33";
+NET "blue_out" LOC = "T7" | IOSTANDARD = "LVCMOS33";
+NET "hs_out" LOC = "N6" | IOSTANDARD = "LVCMOS33";
+NET "vs_out" LOC = "P7" | IOSTANDARD = "LVCMOS33";
