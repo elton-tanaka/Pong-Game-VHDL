@@ -4,15 +4,13 @@ USE ieee.std_logic_unsigned.all;
 
 ENTITY hc05 IS 
 port (
-      clk: in std_logic;
-	  rst: in std_logic;
-	  dout: in std_logic_vector(7 downto 0);
-	 -- enter: in std_logic;  -- switch (6)
-	 -- dado: in std_logic_vector(3 downto 0); --switch(3:0)
-	  rw: out std_logic;
-	  addr: out std_logic_vector(7 downto 0);
-	  din: out std_logic_vector(7 downto 0);
-	  led: out std_logic_vector(7 downto 0)
+    clk: in std_logic;
+	rst: in std_logic;
+	dout: in std_logic_vector(7 downto 0);
+	rw: out std_logic;
+	addr: out std_logic_vector(7 downto 0);
+	din: out std_logic_vector(7 downto 0);
+	start : out std_logic
 );
 END hc05;
 
@@ -45,11 +43,11 @@ signal status: std_logic_vector (4 downto 0);
 begin
 
     addr <= PC;
-	led <= A;
 	
 	process(clk,rst)
 	begin
-	     if rst='1' then
+		 if rst='1' then
+			start <= '0';
 		    A <= (others=>'0');
 			PC <= (others=>'0');
 			rw <= '0';
@@ -68,18 +66,18 @@ begin
 				when RESET2 =>
 					estado <= BUSCA;
 				when BUSCA =>
-					 opcode <= dout; -- recebe cod. da instruo
-					 estado <= DECODE;
+					opcode <= dout; -- recebe cod. da instruo
+					estado <= DECODE;
 				when DECODE =>
-					  case opcode is
+					case opcode is
 					    when "10100110"  =>
-							din <= '1'
+							start <= '1';
                         when others=> null;						
-					  end case;
+					end case;
 				when EXECUTA =>
-					 fase <= "00";
-					 PC <= PC +1; -- Prxima instruo
-					 estado <= BUSCA;
+					fase <= "00";
+					PC <= PC +1; -- Prxima instruo
+					estado <= BUSCA;
 				when others => estado <= RESET1;
 			end case;
 		 end if;
